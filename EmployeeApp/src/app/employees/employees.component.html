@@ -1,0 +1,71 @@
+
+
+<div class="container">
+    <mat-toolbar>
+       
+        <span class="fill-remaining-space"></span>
+        <span>Employees Management App</span>
+        <span class="fill-remaining-space"></span>
+    
+    </mat-toolbar>
+</div>
+<div class="search-div">
+    <button  [routerLink]="['employee']" mat-raised-button>
+        <mat-icon>add</mat-icon> Add Employee
+    </button>
+</div>
+<div class="mat-elevation-z8">
+    <mat-table [dataSource]="listData" matSort>
+        
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        <ng-container matColumnDef="empId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b>Employee Id </b> </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.empId}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="fullName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b>Full Name </b> </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.fullName}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b>Email</b> </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="DOB">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b>Date of Birth</b> </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.DOB | date: 'dd/MM/yy'}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="mobile">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b>Mobile</b> </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.mobile}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="gender">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b>Gender </b> </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.gender}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Address">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b>Address</b> </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.Address}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <button mat-icon-button (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
+                <button mat-icon-button color="warn" (click)="deleteEmployee(row)"><mat-icon>delete_outline</mat-icon></button>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+                Loading data....
+            </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="nodata">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+                No data....
+            </mat-footer-cell>
+        </ng-container>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide': listData!=null}"> </mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['nodata']" [ngClass]="{'hide': !(listData!=null && listData.data.length == 0)}"> </mat-footer-row>
+
+    </mat-table>
+</div>

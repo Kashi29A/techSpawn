@@ -1,0 +1,64 @@
+<mat-toolbar>
+    <span>
+
+        {{service.form.controls['_id'].value?" Modify Employee" :"New Employee"}}
+    </span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"> 
+        <mat-icon>clear</mat-icon>
+    </button>
+    <button *ngIf="!service.form.controls['_id'].value"  mat-stroked-button (click)="onHome()" tabindex="-1"><mat-icon>home</mat-icon></button>
+</mat-toolbar>
+
+<form [formGroup]="service.form" class="normal-form">
+    <mat-grid-list cols="2" rowHeight="300px">
+      <mat-grid-tile>
+        <div class="controles-container">
+           
+           <br>
+            <mat-form-field>
+                <input formControlName="empId" matInput placeholder="Employee Id">
+                
+              </mat-form-field>
+          
+          <mat-form-field>
+            <input formControlName="fullName" matInput placeholder="Full Name">
+            <mat-error>Name is required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="email" matInput placeholder="Email">
+            <mat-error>Email shoul be valid</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="mobile" matInput placeholder="Mobile">
+            <mat-error>Mobile number should be of 10 characters</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="Address" matInput placeholder="Address">
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="controles-container">
+          <div class="add-bottom-padding">
+            <mat-radio-group formControlName="gender">
+              <mat-radio-button value="Male">Male</mat-radio-button>
+              <mat-radio-button value="Female">Female</mat-radio-button>
+              <mat-radio-button value="Others">Other</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          
+          <mat-form-field>
+            <input formControlName="DOB" matInput [matDatepicker]="picker" placeholder=" Date of Birth ">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+  
+          <div class="button-row">
+            <button mat-raised-button color="primary"  [disabled]="!service.form.valid" type="submit" (click)="submitForm()">Submit</button>
+            <button mat-raised-button color="warn" (click)="resetForm()">Clear</button>
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
